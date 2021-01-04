@@ -1,10 +1,342 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>projdk-download place</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+        .nav {
+            height: 70px;
+            border-bottom: 1px solid black;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-right-items {
+            display: flex;
+            margin-left: auto;
+        }
+
+        .nav-item {
+            margin-left: 10px;
+        }
+
+        .company-name {
+            margin-left: 20px;
+        }
+
+        .body {
+            background: url(https://adoptopenjdk.net/dist/assets/background.png);
+            color: #f5f5f5!important;
+            max-width: 100%;
+            overflow-x: hidden;
+            margin: 0;
+        }
+        .grey-bg {
+            background-color: #f5f5f5;
+            color: #152935;
+            padding: 2rem 2rem 5rem;
+            text-align: center;
+        }
+
+        .large-title {
+            font-size: 3rem;
+            margin-top: 0;
+        }
+
+        .btn-container {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            margin-top: 1rem;
+        }
+
+        .btn-label {
+            margin-left: 1rem;
+            cursor: pointer;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: baseline;
+            -ms-flex-align: baseline;
+            align-items: baseline;
+        }
+
+        .filter {
+            width: 8em;
+            height: 2em;
+            -webkit-appearance: button;
+            -webkit-border-radius: 2px;
+            -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+            -webkit-padding-end: 20px;
+            -webkit-padding-start: 2px;
+            -webkit-user-select: none;
+            background-image: url(https://adoptopenjdk.net/dist/assets/15xvbd5.png),-webkit-linear-gradient(#fafafa,#f4f4f4 40%,#e5e5e5);
+            background-position: 97% center;
+            background-repeat: no-repeat;
+            border: 1px solid #aaa;
+            color: #555;
+            font-size: inherit;
+            margin: 20px;
+            overflow: hidden;
+            padding: 5px 10px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .latest-selector {
+            margin: auto;
+            overflow-x: scroll;
+            width: 100%;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+
+        .main-download__variant__table releases-table {
+            width: 100%;
+            border-spacing: 0 10px!important;
+            border-collapse: inherit!important;
+            margin: 0 auto;
+            table-layout: fixed;
+            overflow-x: auto!important;
+        }
+
+        .main-download__variant__name {
+            background-color: #333!important;
+            border-right: 1px solid #f0f0f0;
+            width: 13em;
+        }
+
+        .main-download__variant__name span:nth-child(1) {
+            margin-top: 16px;
+            margin-bottom: 7px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .main-download__variant__name span:nth-child(2) {
+            margin-bottom: 15px;
+            color: #ccc;
+            font-size: 14px;
+            font-weight: 400;
+            display: block;
+            text-align: center;
+        }
+
+        .main-download__variant__os {
+            border-right: 1px solid #f0f0f0;
+        }
+
+        .main-download__variant__architecture span, .main-download__variant__java-package span, .main-download__variant__os span {
+            color: #777;
+            display: block;
+            text-align: center;
+            font-weight: 400;
+        }
+
+        .main-download__variant__architecture {
+            border-right: 1px solid #f0f0f0;
+            width: 6em!important;
+        }
+
+        .main-download__variant__heap_size {
+            border-right: 1px solid #f0f0f0;
+            width: 6em!important;
+        }
+
+        .download__variant__download {
+            background-color: #fff;
+            width: 10em;
+        }
+
+        .main-download__variant__sub-table {
+            width: 100%;
+            border-spacing: 0 1px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .main-download__variant__sub-table__row {
+            padding-top: 1em;
+            padding-bottom: 1em;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .main-download__variant__sub-table__download {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            text-decoration: none;
+            width: 8em;
+            height: 40px;
+            border-radius: 3px;
+            background-color: #3d70b2;
+            color: #fff!important;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        table {
+            display: table;
+            border-collapse: separate;
+            box-sizing: border-box;
+            text-indent: initial;
+            border-spacing: 2px;
+            border-color: black;
+        }
+
+    </style>
 </head>
-<body>
-hello spring
+<div class="nav">
+    <div class="company-name">
+        Tmax
+    </div>
+    <div class="nav-right-items">
+        <div class="nav-item">메뉴1</div>
+        <div class="nav-item">메뉴2</div>
+        <div class="nav-item">메뉴3</div>
+        <div class="nav-item">메뉴4</div>
+    </div>
+</div>
+<body class="body">
+<main class="grey-bg">
+
+    <div class="latest-page">
+        <h1 class="large-title">
+            Latest release
+        </h1>
+
+        <div style="margin-bottom: 2rem;">
+            <div class="btn-container">
+                <form id="jdk-selector" class="btn-form">
+                    <h3>
+                        choose version
+                    </h3>
+                    <label class="btn-label">
+                        <input type="radio" name="jdk" value="openjdk8" class="radio-button" lts="false" checked="checked">
+                        <span>OpenJDK 7</span>
+                    </label>
+                    <label class="btn-label">
+                        <input type="radio" name="jdk" value="openjdk8" class="radio-button" lts="true">
+                        <span>OpenJDK 8 (LTS)</span>
+                    </label>
+                    <label class="btn-label">
+                        <input type="radio" name="jdk" value="openjdk8" class="radio-button" lts="true">
+                        <span>OpenJDK 11 (LTS)</span>
+                    </label>
+                </form>
+            </div>
+        </div>
+
+
+
+        <div id="latest-container" class="animated fadeIn ">
+            <h3 class="release_notes">All Release Notes</h3>
+            <div class="filter-divs">
+                <div class="filter-os filter-div">
+              <span>
+                <strong>Operating System:</strong>
+              </span>
+                    <select id="os-filter" class="filter" onchange="if (!window.__cfRLUnblockHandlers) return false; filterOS()">
+                        <option value="Any">Any</option>
+                        <option value="Linux">Linux</option>
+                        <option value="Windows">Windows</option>
+                    </select>
+                </div>
+                <div class="filter-arch filter-div">
+              <span>
+                <strong>Architecture:</strong>
+              </span>
+                    <select id="arch-filter" class="filter" onchange="if (!window.__cfRLUnblockHandlers) return false; filterArch()">
+                        <option value="Any">Any</option>
+                        <option value="x64">x64</option>
+                        <option value="x86">x86</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="latest-selector">
+                <table class="main-download__variant__table releases-table">
+                    <tbody>
+                    <tr>
+                        <td class="main-download__variant__name">
+                            <span>jdk-11.0.9.1+1</span>
+                            <span class="download-last-version">
+                      AdoptOpenJDK
+                      ::after
+                    </span>
+                        </td>
+                        <td class="main-download__variant__os">
+                            <span class="os">Linux</span>
+                        </td>
+                        <td class="main-download__variant__architecture">
+                            <span class="arch">x64</span>
+                        </td>
+                        <td class="main-download__variant__heap_size">
+                            <span class="heap_size">Normal</span>
+                        </td>
+                        <td class="main-download__variant__download">
+                            <table class="main-download__variant__sub-table">
+                                <tbody>
+                                <tr class="main-download__variant__sub-table__tr">
+
+                                    <td class="main-download__variant__sub-table__row">
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                    <span class="main-download__variant__download__title">
+                                      <a href="" class="dark-link">Checksum (SHA256)</a>
+                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                    <span>
+                                      JDK - 194 MB
+                                    </span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+
+                                    <td class="main-download__variant__sub-table__row">
+                                        <a class="main-download__variant__sub-table__download" href="">
+                                            <i class="fa fa-download" aria-hidden="true">
+                                                ::before
+                                            </i>
+                                            "&npsp;.tar.gz"
+                                        </a>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+<script src="script.js"></script>
 </body>
 </html>
