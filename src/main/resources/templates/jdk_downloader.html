@@ -220,6 +220,30 @@
             Latest release
         </h1>
 
+        <!-- -->
+        <h2>QAS Dashboard</h2>
+        <table>
+            <tr>
+                <td>Welcome</td>
+                <td>${username}!</td>
+            </tr>
+            <tr>
+                <td>Position:</td>
+                <td>${position}</td>
+            </tr>
+        </table>
+        <br />
+        <table>
+            <tr>
+                <th>File List</th>
+            </tr>
+            <c:forEach var="listValue" items="${files}">
+                <tr>
+                    <td><a href="${listValue}">${listValue}</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+
         <div style="margin-bottom: 2rem;">
             <div class="btn-container">
                 <form id="jdk-selector" class="btn-form">

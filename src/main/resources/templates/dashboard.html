@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf 예제</title>
+</head>
+<body>
+<h1>Thymeleaf 예제</h1>
+<span th:text="${username}"></span><br/>
+<span th:text="${position}"></span><br/>
+
+<table>
+    <tr th:each="list : ${files}">
+        <td th:text="${list}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
