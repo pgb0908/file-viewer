@@ -3,6 +3,8 @@ package com.gyubong.fileviewer.service;
 import com.gyubong.fileviewer.domain.Member;
 import com.gyubong.fileviewer.repository.MemberRepository;
 import com.gyubong.fileviewer.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +13,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
+    @Autowired
     public MemberService(MemoryMemberRepository memoryMemberRepository){
         this.memberRepository = memoryMemberRepository;
     }

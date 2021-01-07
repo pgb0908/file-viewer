@@ -1,11 +1,15 @@
 package com.gyubong.fileviewer.controller;
 
+import com.gyubong.fileviewer.domain.FileInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 @Controller
 public class DashBoardController {
@@ -13,22 +17,44 @@ public class DashBoardController {
     @GetMapping("/dashboard")
     public String dashboardPage(Model model) {
 
-        model.addAttribute("username", "erick.acabal");
-        model.addAttribute("position", "User");
-        model.addAttribute("files", getFileListing());
+        // 파일에 출력할 리스트 뽑기
+        ArrayList<FileInfo> fileInfoList;
+        String filePath;
+
+        filePath = "C:/Users/Tmax/test";
+        File file = new File(filePath);
+        fileInfoList = getFileInfoListing(file);
+
+        model.addAttribute("fileInfo", fileInfoList);
+        model.addAttribute("pDir", file.getParent());
 
         return "dashboard";
     }
 
-    private ArrayList getFileListing() {
+
+    private ArrayList<FileInfo> getFileInfoListing(File dir) {
         //C:\Users\Tmax\springMVC
-        File dir = new File("C:/Users/Tmax");
         File[] files = dir.listFiles();
 
-        ArrayList filPaths = new ArrayList();
+        // fileInfo class로 만들라...
+        ArrayList<FileInfo> fileInfoList = new ArrayList();
+
         for (File file : files) {
-            filPaths.add(file.getAbsolutePath());
+            FileInfo fileInfo = new FileInfo();
+
+            fileInfo.setFileName(file.getName());
+            fileInfo.setFileSize(file.length());
+            fileInfo.setLastMoified(file.lastModified());
+            fileInfo.setParentFile(file.getParentFile());
+            fileInfo.setFileDir(dir.getAbsolutePath());
+
+            fileInfoList.add(fileInfo);
         }
-        return filPaths;
+
+        Collections.sort(fileInfoList, (a, b) -> (int) (long) a.getFileSize() -  (int) (long) b.getFileSize());
+
+        return fileInfoList;
     }
+
 }
+
